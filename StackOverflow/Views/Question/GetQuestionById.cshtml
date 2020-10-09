@@ -1,0 +1,54 @@
+﻿@model StackOverflow.Models.NewQuestion
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetQuestionById</title>
+</head>
+<body>
+    <div>
+        <h2>@Html.DisplayFor(model => model.QuestionDetails.Question)</h2>
+        @Html.HiddenFor(model => model.QuestionDetails.QuestionId)
+    </div>
+    <div>
+        <table>
+            @foreach (var item in Model.ListAnswerDetails)
+            {
+                <tr>
+                    <td>
+                        <h4>@Html.DisplayFor(modelItem => item.Answer)</h4>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div>
+        @using (Html.BeginForm("GetQuestionById", "Question", FormMethod.Post))
+        {
+            @Html.Hidden("QuestionId", new { @value = Model.QuestionDetails.QuestionId })
+            <table>
+                <tr>
+                    <td style="width: 800px;">
+                        @Html.TextArea("Answer", null, htmlAttributes: new { @class = "form-control width-textarea" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.AnswerDetails.Answer, "", new { @class = "text-danger", @style = "color: red;" })
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td>
+                        <input id="addNew" class="btn btn-secondary" type="submit" value="Post Answer" onclick="location.href='@Url.Action("GetQuestionById", "Question")'" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

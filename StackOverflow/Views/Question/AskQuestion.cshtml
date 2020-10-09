@@ -1,0 +1,45 @@
+﻿@model StackOverflow.Models.QuestionsModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AskQuestion</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AskQuestion", "Question", FormMethod.Post))
+        {
+            <table style="margin-top: 30px; margin-bottom: 10px;">
+                <tr>
+                    <td style="width: 800px;">
+                        @Html.TextBoxFor(model => model.Question, htmlAttributes: new { @class = "form-control width-textarea" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ValidationMessageFor(model => model.Question, "", new { @class = "text-danger", @style = "color: red;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DropDownList("CategoryId", (SelectList)ViewBag.CategoryList)
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td>
+                        <input id="addNew" class="btn btn-secondary" type="submit" value="Post Question" onclick="location.href='@Url.Action("AskQuestion", "Question")'" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

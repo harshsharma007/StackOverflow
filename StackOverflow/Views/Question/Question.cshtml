@@ -1,0 +1,46 @@
+﻿@model IEnumerable<StackOverflow.Models.QuestionsModel>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Question</title>
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <table id="customers" border="1" style="margin-top: 20px;">
+            <tr>
+                <th>
+                    @Html.DisplayName("Questions")
+                </th>
+                <th>
+                    @Html.DisplayName("Tags")
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("GetQuestionById", new { QuestionId = item.QuestionId })">
+                            @Html.DisplayFor(modelItem => item.Question)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <input id="addNew" class="btn btn-secondary" type="submit" value="Ask A Question" onclick="location.href='@Url.Action("AskQuestion", "Question")'" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

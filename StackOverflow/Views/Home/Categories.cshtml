@@ -1,0 +1,36 @@
+﻿@model IEnumerable<StackOverflow.Models.Category>
+
+<h2>Categories</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Categories</title>
+    <link href="@Url.Content("~/Content/site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div>
+        <table id="customers" border="1" style="margin-top: 20px;">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
